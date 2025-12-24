@@ -24,7 +24,8 @@ public:
               int maxHealth); // 构造函数
     virtual ~Character();     // 析构函数
 
-    void takeDamage(int damage); // 角色受到伤害
+    virtual void attack(Character& target); // 对目标的攻虚构击函数
+    void takeDamage(int damage);            // 角色受到伤害
 
     // 对外接口类函数
     const std::string getName() const; // 获取角色名字

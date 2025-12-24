@@ -20,8 +20,15 @@ Character::Character(const std::string name, int attack, int mana, int maxMana, 
 Character::~Character() {
 }
 
+// 攻击目标函数
+void Character::attack(Character& target) {
+    // TODO: 增加打印回报信息
+    target.takeDamage(attack_);
+}
+
 void Character::takeDamage(int damage) {
     // TODO: 这里暂时用简单伤害计算系统，后续可以调整
+    // TODO：增加打印回报信息
     if (damage < defense_) {
         // 如果伤害小于护盾值，则不扣血
         return;
