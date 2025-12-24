@@ -1,5 +1,7 @@
 #include "character/Character.h"
 
+#include <iostream>
+
 /**
  * @brief 构造一个角色
  * @param name 角色名称
@@ -71,4 +73,13 @@ const int Character::getHealth() const {
 // 获取角色最大生命值
 const int Character::getMaxHealth() const {
     return maxHealth_;
+}
+
+// 打印角色相关信息
+void Character::printInformation() {
+    std::cout << "Name: " << name_ << std::endl;
+    std::cout << "Attack: " << attack_ << std::endl;
+    std::cout << "Defense: " << defense_ << std::endl;
+    std::cout << "Mana: " << mana_ << "/" << maxMana_ << std::endl;
+    std::cout << "Health: " << health_ << "/" << maxHealth_ << std::endl;
 }

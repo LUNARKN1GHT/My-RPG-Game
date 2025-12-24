@@ -35,6 +35,7 @@ public:
     const int getDefense() const;      // 获取角色防御力
     const int getHealth() const;       // 获取角色生命值
     const int getMaxHealth() const;    // 获取角色最大生命值
+    virtual void printInformation();   // 打印角色相关信息
 };
 
 #endif // CHARACTER_H
