@@ -14,13 +14,17 @@ private:
     int mana_;         // 角色蓝量
     int maxMana_;      // 角色最大蓝量
     int defense_;      // 角色防御力
-    int health_;       // 角色生命值
     int maxHealth_;    // 角色最大生命值
+
+protected:
+    int health_; // 角色生命值
 
 public:
     Character(const std::string name, int attack, int mana, int maxMana, int defense, int health,
               int maxHealth); // 构造函数
     virtual ~Character();     // 析构函数
+
+    void takeDamage(int damage); // 角色受到伤害
 
     // 对外接口类函数
     const std::string getName() const; // 获取角色名字

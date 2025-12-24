@@ -20,6 +20,17 @@ Character::Character(const std::string name, int attack, int mana, int maxMana, 
 Character::~Character() {
 }
 
+void Character::takeDamage(int damage) {
+    // TODO: 这里暂时用简单伤害计算系统，后续可以调整
+    if (damage < defense_) {
+        // 如果伤害小于护盾值，则不扣血
+        return;
+    } else {
+        // 简单地用伤害值减去防御力
+        health_ -= damage - defense_;
+    }
+}
+
 // 获取角色名称
 const std::string Character::getName() const {
     return name_;
