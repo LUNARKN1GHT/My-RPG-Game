@@ -6,10 +6,15 @@ Mage::Mage(const std::string& name) : Character(name, 10, 50, 50, 5, 30, 30) {
 
 // 重写攻击函数
 void Mage::attack(Character& target) {
-    // TODO: 增加打印回报信息
+    std::cout << getName() << " begins to chant a spell...\n";
 
     // 基础攻击
     Character::attack(target);
 
-    // TODO: 法师攻击特殊逻辑
+    // 法师攻击特殊逻辑
+    std::cout << "A burst of arcane energy hits " << target.getName() << "!\n";
+
+        // 打印剩余生命值
+    std::cout << target.getName() << " HP: " << target.getHealth() << "/" << target.getMaxHealth()
+              << std::endl;
 }

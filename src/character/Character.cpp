@@ -24,8 +24,13 @@ Character::~Character() {
 
 // 攻击目标函数
 void Character::attack(Character& target) {
-    // TODO: 增加打印回报信息
+    // 打印攻击前信息
+    std::cout << getName() << " attacks " << target.getName() << "!\n";
+
+    // 具体攻击实现
     target.takeDamage(attack_);
+
+    // TODO: 增加游戏终止逻辑
 }
 
 void Character::takeDamage(int damage) {
