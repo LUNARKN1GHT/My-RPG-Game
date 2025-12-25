@@ -7,6 +7,9 @@
 
 class Skill; // 前向声明
 
+/**
+ * @brief 游戏中的角色类
+ */
 class Character {
 private:
     std::string name_; // 角色名称
@@ -18,6 +21,17 @@ private:
     int maxHealth_;    // 角色最大生命值
 
 public:
+    /**
+     * @brief 默认构造函数
+     *
+     * @param name 角色名称
+     * @param attack 角色攻击力
+     * @param mana 角色蓝量
+     * @param maxMana 角色最大蓝量
+     * @param defense 角色防御力
+     * @param health 角色生命值
+     * @param maxHealth 角色最大生命值
+     */
     Character(const std::string name, int attack, int mana, int maxMana, int defense, int health,
               int maxHealth); // 构造函数
     virtual ~Character();     // 析构函数

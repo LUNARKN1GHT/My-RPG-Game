@@ -20,7 +20,18 @@ protected:
     void printEnemyList(); // 打印敌人列表
 
 public:
-    Battle(Character* player);       // 构造函数
+    /**
+     * @brief 构造函数
+     *
+     * @param player 进入战斗的角色
+     */
+    Battle(Character* player); // 构造函数
+
+    /**
+     * @brief 在战斗中增加敌人
+     *
+     * @param enemy 加入战斗的敌人
+     */
     void addEnemy(Character* enemy); // 增加敌人列表
 
     void start(); // 游戏启动
