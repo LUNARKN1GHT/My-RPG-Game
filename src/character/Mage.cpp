@@ -1,4 +1,4 @@
-#include "Mage.h"
+#include "../include/character/Mage.h"
 
 // 构造函数
 Mage::Mage(const std::string& name) : Character(name, 10, 50, 50, 5, 30, 30) {

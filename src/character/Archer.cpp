@@ -1,4 +1,4 @@
-#include "Archer.h"
+#include "../include/character/Archer.h"
 
 // 构造函数
 Archer::Archer(const std::string& name) : Character(name, 10, 20, 20, 10, 40, 40) {

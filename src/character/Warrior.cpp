@@ -1,4 +1,4 @@
-#include "Warrior.h"
+#include "../include/character/Warrior.h"
 
 // 构造函数
 Warrior::Warrior(const std::string& name) : Character(name, 15, 20, 20, 15, 50, 50) {
