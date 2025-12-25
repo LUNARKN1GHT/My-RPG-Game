@@ -7,11 +7,11 @@
 #include <iostream>
 
 int main() {
-    Warrior warrior("Conan");
-    Mage mage("Gandalf");
+    Warrior warrior01("Conan");
+    Warrior warrior02("Gandalf");
 
-    Battle battle(&warrior);
-    battle.addEnemy(&mage);
+    Battle battle(&warrior01);
+    battle.addEnemy(&warrior02);
 
     battle.start();
 }
