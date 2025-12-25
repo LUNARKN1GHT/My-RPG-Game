@@ -1,3 +1,4 @@
+#include "../include/battle/Battle.h"
 #include "../include/character/Archer.h"
 #include "../include/character/Character.h"
 #include "../include/character/Mage.h"
@@ -6,13 +7,11 @@
 #include <iostream>
 
 int main() {
-    Character timber("Timber", 10, 10, 10, 2, 20, 20);
-    Warrior warrior("Warrior_01");
-    warrior.printInformation();
-    std::cout << std::endl;
-    timber.printInformation();
-    std::cout << std::endl;
+    Warrior warrior("Conan");
+    Mage mage("Gandalf");
 
-    warrior.attack(timber);
-    timber.printInformation();
+    Battle battle(&warrior);
+    battle.addEnemy(&mage);
+
+    battle.start();
 }
