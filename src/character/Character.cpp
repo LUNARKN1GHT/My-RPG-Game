@@ -1,4 +1,5 @@
 #include "character/Character.h"
+#include "skill/Skill.h"
 
 #include <iostream>
 
@@ -43,6 +44,32 @@ void Character::takeDamage(int damage) {
         // 简单地用伤害值减去防御力
         health_ -= damage - defense_;
     }
+}
+
+/**
+ * @brief 增加角色技能
+ *
+ * @param skill 增加的技能
+ */
+void Character::addSkill(std::unique_ptr<Skill> skill) {
+    skills_.push_back(std::move(skill));
+}
+
+/**
+ * @brief 使用技能
+ *
+ * @param index 使用技能的序号
+ * @param target 技能使用目标
+ */
+void Character::useSkill(size_t index, Character& target) {
+    if (index >= skills_.size()) {
+        std::cout << "Invalid skill index!\n";
+        return;
+    }
+
+    std::cout << getName() << " uses " << skills_[index]->getName() << "!\n";
+
+    skills_[index]->use(*this, target);
 }
 
 // 获取角色名称

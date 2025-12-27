@@ -2,6 +2,7 @@
 #define CHARACTER_H
 
 #include <iostream>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -19,6 +20,8 @@ private:
     int defense_;      // 角色防御力
     int health_;       // 角色生命值
     int maxHealth_;    // 角色最大生命值
+
+    std::vector<std::unique_ptr<Skill>> skills_; // 技能列表
 
 public:
     /**
@@ -38,6 +41,10 @@ public:
 
     virtual void attack(Character& target); // 对目标的攻虚构击函数
     void takeDamage(int damage);            // 角色受到伤害
+
+    // 技能相关接口
+    void addSkill(std::unique_ptr<Skill> skill);    // 增加技能
+    void useSkill(size_t index, Character& target); // 使用技能
 
     // 对外接口类函数
     const std::string getName() const; // 获取角色名字
