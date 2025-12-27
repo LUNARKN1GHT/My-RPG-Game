@@ -1,7 +1,7 @@
 #ifndef FIREBALL_H
 #define FIREBALL_H
 
-#include "skill/Skill.h"
+#include "../include/skill/Skill.h"
 
 /**
  * @brief 技能：火球，继承自 SKill

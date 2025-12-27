@@ -19,11 +19,7 @@ public:
     // 接口函数，获取技能名称
     virtual std::string getName() const = 0;
 
-    /**
-     * @brief 使用技能
-     * @param user 技能使用者
-     * @param target 技能目标
-     */
+    // 使用技能
     virtual void use(Character& user, Character& target) = 0;
 };
 

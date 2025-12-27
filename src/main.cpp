@@ -3,15 +3,15 @@
 #include "../include/character/Character.h"
 #include "../include/character/Mage.h"
 #include "../include/character/Warrior.h"
+#include "../include/skill/Fireball.h"
 
 #include <iostream>
+#include <memory>
 
 int main() {
-    Warrior warrior01("Conan");
-    Warrior warrior02("Gandalf");
+    Mage mage("Gandalf");
+    Warrior enemy("orc");
 
-    Battle battle(&warrior01);
-    battle.addEnemy(&warrior02);
-
-    battle.start();
+    mage.addSkill(std::make_unique<Fireball>());
+    mage.useSkill(0, enemy);
 }

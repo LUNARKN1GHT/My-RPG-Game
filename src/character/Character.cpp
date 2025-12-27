@@ -1,5 +1,5 @@
-#include "character/Character.h"
-#include "skill/Skill.h"
+#include "../include/character/Character.h"
+#include "../include/skill/Skill.h"
 
 #include <iostream>
 

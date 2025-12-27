@@ -1,5 +1,5 @@
-#include "skill/Fireball.h"
-#include "character/Character.h"
+#include "../include/skill/Fireball.h"
+#include "../include/character/Character.h"
 #include <iostream>
 
 /**
