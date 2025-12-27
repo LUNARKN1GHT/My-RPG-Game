@@ -10,6 +10,7 @@ class Fireball : public Skill {
 public:
     std::string getName() const override;
     void use(Character& user, Character& target) override;
+    std::string getDescription() const override;
 };
 
 #endif // FIREBALL_H

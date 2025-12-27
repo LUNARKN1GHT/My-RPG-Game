@@ -14,4 +14,6 @@ int main() {
 
     mage.addSkill(std::make_unique<Fireball>());
     mage.useSkill(0, enemy);
+
+    mage.printInformation();
 }

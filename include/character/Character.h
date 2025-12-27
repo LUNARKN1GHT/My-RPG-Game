@@ -47,14 +47,15 @@ public:
     void useSkill(size_t index, Character& target); // 使用技能
 
     // 对外接口类函数
-    const std::string getName() const; // 获取角色名字
-    const int getAttack() const;       // 获取角色攻击力
-    const int getMana() const;         // 获取角色蓝量
-    const int getMaxMana() const;      // 获取角色最大蓝量
-    const int getDefense() const;      // 获取角色防御力
-    const int getHealth() const;       // 获取角色生命值
-    const int getMaxHealth() const;    // 获取角色最大生命值
-    virtual void printInformation();   // 打印角色相关信息
+    const std::string getName() const;                           // 获取角色名字
+    const int getAttack() const;                                 // 获取角色攻击力
+    const int getMana() const;                                   // 获取角色蓝量
+    const int getMaxMana() const;                                // 获取角色最大蓝量
+    const int getDefense() const;                                // 获取角色防御力
+    const int getHealth() const;                                 // 获取角色生命值
+    const int getMaxHealth() const;                              // 获取角色最大生命值
+    virtual void printInformation();                             // 打印角色相关信息
+    const std::vector<std::unique_ptr<Skill>> getSkills() const; // 获取角色技能信息
 };
 
 #endif // CHARACTER_H

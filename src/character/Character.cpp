@@ -114,4 +114,11 @@ void Character::printInformation() {
     std::cout << "Defense: " << defense_ << std::endl;
     std::cout << "Mana: " << mana_ << "/" << maxMana_ << std::endl;
     std::cout << "Health: " << health_ << "/" << maxHealth_ << std::endl;
+
+    std::cout << "\nSkills: " << std::endl;
+    // 打印角色技能列表
+    for (size_t index = 0; index < skills_.size(); index++) {
+        std::cout << skills_[index]->getName() << " : " << skills_[index]->getDescription()
+                  << std::endl;
+    }
 }

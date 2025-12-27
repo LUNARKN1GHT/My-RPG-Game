@@ -21,6 +21,9 @@ public:
 
     // 使用技能
     virtual void use(Character& user, Character& target) = 0;
+
+    // 获取技能信息
+    virtual std::string getDescription() const = 0;
 };
 
 #endif // SKILL_H

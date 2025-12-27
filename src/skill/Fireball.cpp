@@ -21,3 +21,10 @@ void Fireball::use(Character& user, Character& target) {
     std::cout << user.getName() << " casts Fireball!\n";
     target.takeDamage(user.getAttack() + 10); // TODO: 增加火球伤害计算逻辑
 }
+
+/**
+ * @brief 获取火球技能信息
+ */
+std::string Fireball::getDescription() const {
+    return "This is Fireball";
+}
