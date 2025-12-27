@@ -11,3 +11,5 @@ target_include_directories(My-RPG-Game
     PRIVATE
     ${CMAKE_SOURCE_DIR}/include
 )
+
+message(STATUS "SOURCES = ${SOURCES}")
