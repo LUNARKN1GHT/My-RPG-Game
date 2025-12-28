@@ -45,6 +45,7 @@ public:
     // 技能相关接口
     void addSkill(std::unique_ptr<Skill> skill);    // 增加技能
     void useSkill(size_t index, Character& target); // 使用技能
+    void consumeMana(int manaCost);                 // 技能使用蓝量，消耗蓝量
 
     // 对外接口类函数
     const std::string getName() const;                           // 获取角色名字

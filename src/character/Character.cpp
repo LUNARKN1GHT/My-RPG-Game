@@ -122,3 +122,9 @@ void Character::printInformation() {
                   << std::endl;
     }
 }
+
+/**
+ * @brief 技能对角色蓝量的消耗
+ *
+ * @param manaCost 技能需要的蓝量
+ */

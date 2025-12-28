@@ -28,3 +28,17 @@ void Fireball::use(Character& user, Character& target) {
 std::string Fireball::getDescription() const {
     return "This is Fireball";
 }
+
+/**
+ * @brief 获取技能蓝量消耗
+ */
+int Fireball::getManaCost() const {
+    return 20;
+}
+
+/**
+ * @brief 获取技能冷却时间
+ */
+int Fireball::getCooldown() const {
+    return 2;
+}
