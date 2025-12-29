@@ -1,0 +1,85 @@
+@startuml
+title My-RPG-Game — Core Architecture
+
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+
+' =========================
+' Skill System
+' =========================
+
+abstract class Skill {
+    - currentCooldown_ : int
+
+    + getName() : string
+    + getDescription() : string
+    + getManaCost() : int
+    + getCooldown() : int
+
+    + canUse(user : Character) : bool
+    + onUse(user : Character) : void
+    + tickCooldown() : void
+
+    + use(user : Character, target : Character) : void
+}
+
+class BasicAttack {
+    + getName() : string
+    + getDescription() : string
+    + getManaCost() : int
+    + getCooldown() : int
+    + use(user : Character, target : Character) : void
+}
+
+class Fireball {
+    + getName() : string
+    + getDescription() : string
+    + getManaCost() : int
+    + getCooldown() : int
+    + use(user : Character, target : Character) : void
+}
+
+Skill <|-- BasicAttack
+Skill <|-- Fireball
+
+' =========================
+' Character System
+' =========================
+
+class Character {
+    - name_ : string
+    - attack_ : int
+    - mana_ : int
+    - maxMana_ : int
+    - defense_ : int
+    - health_ : int
+    - maxHealth_ : int
+
+    - skills_ : vector<unique_ptr<Skill>>
+
+    + addSkill(skill : unique_ptr<Skill>) : void
+    + getSkill(index : size_t) : Skill*
+    + getSkillCount() : size_t
+    + useSkill(index : size_t, target : Character) : void
+
+    + takeDamage(damage : int) : void
+    + consumeMana(amount : int) : void
+}
+
+Character "1" o-- "*" Skill : owns
+
+' =========================
+' Battle System
+' =========================
+
+class Battle {
+    - player_ : Character
+    - enemies_ : vector<Character>
+
+    + runTurn() : void
+    - printEnemyList() : void
+}
+
+Battle --> Character : controls
+
+@enduml
