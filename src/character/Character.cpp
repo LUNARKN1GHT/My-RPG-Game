@@ -23,17 +23,6 @@ Character::Character(const std::string name, int attack, int mana, int maxMana, 
 Character::~Character() {
 }
 
-// 攻击目标函数
-void Character::attack(Character& target) {
-    // 打印攻击前信息
-    std::cout << getName() << " attacks " << target.getName() << "!\n";
-
-    // 具体攻击实现
-    target.takeDamage(attack_);
-
-    // TODO: 增加游戏终止逻辑
-}
-
 void Character::takeDamage(int damage) {
     // TODO: 这里暂时用简单伤害计算系统，后续可以调整
     // TODO：增加打印回报信息
@@ -58,18 +47,21 @@ void Character::addSkill(std::unique_ptr<Skill> skill) {
 /**
  * @brief 使用技能
  *
- * @param index 使用技能的序号
+ * @param index 需要使用技能序号
  * @param target 技能使用目标
  */
 void Character::useSkill(size_t index, Character& target) {
-    if (index >= skills_.size()) {
-        std::cout << "Invalid skill index!\n";
-        return;
+    Skill* skill = getSkill(index);
+    if (!skill) {
+        std::cout << "Invalid skill index.\n";
     }
 
-    std::cout << getName() << " uses " << skills_[index]->getName() << "!\n";
+    if (!skill->canUse(*this)) {
+        std::cout << "Cannot use skill: " << skill->getName() << "\n";
+    }
 
-    skills_[index]->use(*this, target);
+    skill->use(*this, target);
+    skill->onUse(*this);
 }
 
 // 获取角色名称
@@ -128,3 +120,37 @@ void Character::printInformation() {
  *
  * @param manaCost 技能需要的蓝量
  */
+
+/**
+ * @brief 获取角色技能列表中的技能
+ *
+ * @param index 技能列表中的技能序号
+ *
+ * @return 返回序号对应的技能
+ */
+Skill* Character::getSkill(size_t index) const {
+    if (index >= skills_.size()) {
+        return nullptr;
+    }
+    return skills_[index].get();
+}
+
+/**
+ * @brief 获取角色技能数量
+ *
+ * @return 角色技能数量
+ */
+size_t Character::getSkillCount() const {
+    return skills_.size();
+}
+
+/**
+ * @brief 角色消耗蓝量
+ */
+void Character::consumeMana(int manaCost) {
+    if (mana_ < manaCost) {
+        mana_ = 0;
+    } else {
+        mana_ -= manaCost;
+    }
+}

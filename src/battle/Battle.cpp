@@ -33,9 +33,6 @@ void Battle::start() {
     std::cout << "Battle Start!\n";
 
     // TODO: 增加 AI 攻击逻辑
-    // 玩家攻击敌人
-    player_->attack(*enemy);
 
-    // 敌人反击
-    enemy->attack(*player_);
+    player_->useSkill(0, *enemy);
 }
