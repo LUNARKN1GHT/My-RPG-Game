@@ -2,6 +2,5 @@
 
 class Warrior : public Character {
 public:
-    Warrior(const std::string& name);        // 构造函数
-    void attack(Character& target) override; // 重写函数
+    Warrior(const std::string& name); // 构造函数
 };

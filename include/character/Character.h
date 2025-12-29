@@ -39,13 +39,14 @@ public:
               int maxHealth); // 构造函数
     virtual ~Character();     // 析构函数
 
-    virtual void attack(Character& target); // 对目标的攻虚构击函数
-    void takeDamage(int damage);            // 角色受到伤害
+    void takeDamage(int damage); // 角色受到伤害
 
     // 技能相关接口
     void addSkill(std::unique_ptr<Skill> skill);    // 增加技能
     void useSkill(size_t index, Character& target); // 使用技能
     void consumeMana(int manaCost);                 // 技能使用蓝量，消耗蓝量
+    Skill* getSkill(size_t index) const;            // 获取角色技能列表中的技能
+    size_t getSkillCount() const;                   // 获取技能数量
 
     // 对外接口类函数
     const std::string getName() const;                           // 获取角色名字
