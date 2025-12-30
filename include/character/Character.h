@@ -1,6 +1,8 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include "../include/core/DamageType.h"
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -15,29 +17,19 @@ class Character {
     int attack_; // 角色攻击力
     int mana_; // 角色蓝量
     int maxMana_; // 角色最大蓝量
-    int defense_; // 角色防御力
     int health_; // 角色生命值
     int maxHealth_; // 角色最大生命值
+    int physicalDefense_; // 角色物理抗性
+    int magicalDefense_; // 角色法术抗性
 
     std::vector<std::unique_ptr<Skill> > skills_; // 技能列表
 
 public:
-    /**
-     * @brief 默认构造函数
-     *
-     * @param name 角色名称
-     * @param attack 角色攻击力
-     * @param mana 角色蓝量
-     * @param maxMana 角色最大蓝量
-     * @param defense 角色防御力
-     * @param health 角色生命值
-     * @param maxHealth 角色最大生命值
-     */
-    Character(std::string name, int attack, int mana, int maxMana, int defense, int health,
+    Character(std::string name, int attack, int mana, int maxMana, int physicalDefense, int magicalDefense, int health,
               int maxHealth); // 构造函数
     virtual ~Character(); // 析构函数
 
-    void takeDamage(int damage); // 角色受到伤害
+    void takeDamage(int damage, DamageType damageType); // 角色受到伤害
 
     // 技能相关接口
     void addSkill(std::unique_ptr<Skill> skill); // 增加技能
@@ -51,7 +43,8 @@ public:
     [[nodiscard]] int getAttack() const; // 获取角色攻击力
     [[nodiscard]] int getMana() const; // 获取角色蓝量
     [[nodiscard]] int getMaxMana() const; // 获取角色最大蓝量
-    [[nodiscard]] int getDefense() const; // 获取角色防御力
+    [[nodiscard]] int getPhysicalDefense() const;   // 获取角色物理抗性
+    [[nodiscard]] int getMagicalDefense() const;
     [[nodiscard]] int getHealth() const; // 获取角色生命值
     [[nodiscard]] int getMaxHealth() const; // 获取角色最大生命值
     virtual void printBasicInformation(); // 打印角色基本相关信息

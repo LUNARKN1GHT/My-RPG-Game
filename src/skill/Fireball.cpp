@@ -19,7 +19,7 @@ std::string Fireball::getName() const {
  */
 void Fireball::use(Character &user, Character &target) {
     std::cout << user.getName() << " casts Fireball!\n";
-    target.takeDamage(user.getAttack() + 10); // TODO: 增加火球伤害计算逻辑
+    target.takeDamage(user.getAttack() + 10, getDamageType());
 }
 
 /**
@@ -41,4 +41,13 @@ int Fireball::getManaCost() const {
  */
 int Fireball::getCooldown() const {
     return 2;
+}
+
+/**
+ * @brief 获取角色技能类型
+ *
+ * @return 技能伤害类型
+ */
+DamageType Fireball::getDamageType() const {
+    return DamageType::Magical;
 }

@@ -18,8 +18,13 @@ int BasicAttack::getCooldown() const {
     return 0;
 }
 
+DamageType BasicAttack::getDamageType() const {
+    // 基础攻击是物理伤害
+    return DamageType::Physical;
+}
+
 void BasicAttack::use(Character &user, Character &target) {
     std::cout << user.getName() << " attacks " << target.getName() << " with a basic attack!\n";
 
-    target.takeDamage(user.getAttack());
+    target.takeDamage(user.getAttack(), getDamageType());
 }

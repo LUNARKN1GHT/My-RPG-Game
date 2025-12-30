@@ -1,6 +1,8 @@
 #ifndef SKILL_H
 #define SKILL_H
 
+#include "../include/core/DamageType.h"
+
 #include <string>
 
 class Character; // 前向声明，避免头文件循环依赖
@@ -18,7 +20,8 @@ public:
 
     // 技能基本信息
     [[nodiscard]] virtual std::string getName() const = 0; // 获取技能名称
-    [[nodiscard]] virtual std::string getDescription() const = 0; // 获取技能信息
+    [[nodiscard]] virtual std::string getDescription() const = 0; // 获取技能信息、
+    [[nodiscard]] virtual DamageType getDamageType() const = 0; // 获取技能伤害类型
 
     // 资源与规则
     [[nodiscard]] virtual int getManaCost() const = 0; // 技能蓝量消耗

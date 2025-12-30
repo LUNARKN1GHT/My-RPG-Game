@@ -11,6 +11,7 @@ public:
     // 技能信息获取
     [[nodiscard]] std::string getName() const override; // 获取技能名称
     [[nodiscard]] std::string getDescription() const override; // 获取技能说明
+    [[nodiscard]] DamageType getDamageType() const override;
 
     // 技能资源消耗
     [[nodiscard]] int getManaCost() const override; // 获取技能蓝量消耗

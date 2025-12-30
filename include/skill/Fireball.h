@@ -15,6 +15,7 @@ public:
     // 技能资源消耗
     [[nodiscard]] int getManaCost() const override; // 获取技能蓝量消耗
     [[nodiscard]] int getCooldown() const override; // 获取技能冷却时间
+    [[nodiscard]] DamageType getDamageType() const override; // 获取技能伤害类型
 
     // 角色使用技能
     void use(Character& user, Character& target) override;
