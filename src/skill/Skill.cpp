@@ -1,7 +1,7 @@
 #include "../include/skill/Skill.h"
 #include "../include/character/Character.h"
 
-bool Skill::canUse(const Character& user) const {
+bool Skill::canUse(const Character &user) const {
     return user.getMana() >= getManaCost() && currentCooldown_ == 0;
 }
 
@@ -10,7 +10,7 @@ bool Skill::canUse(const Character& user) const {
  *
  * @param user 技能使用者
  */
-void Skill::onUse(Character& user) {
+void Skill::onUse(Character &user) {
     user.consumeMana(getManaCost());
     currentCooldown_ = getCooldown();
 }

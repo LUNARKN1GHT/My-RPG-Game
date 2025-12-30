@@ -2,11 +2,11 @@
 #include <iostream>
 
 // 构造函数
-Battle::Battle(Character* player) : player_(player) {
+Battle::Battle(Character *player) : player_(player) {
 }
 
 // 添加敌人
-void Battle::addEnemy(Character* enemy) {
+void Battle::addEnemy(Character *enemy) {
     if (enemy) {
         enemyList_.push_back(enemy);
     }
@@ -17,7 +17,7 @@ void Battle::printEnemyList() const {
     // TODO: 打印敌人列表提示
     for (size_t i = 0; i < enemyList_.size(); ++i) {
         std::cout << i << ": " << enemyList_[i]->getName() << "(HP: " << enemyList_[i]->getHealth()
-                  << ")\n";
+                << ")\n";
     }
 }
 
@@ -29,7 +29,7 @@ void Battle::start() const {
         return;
     }
 
-    Character* enemy = enemyList_[0];
+    Character *enemy = enemyList_[0];
 
     std::cout << "Battle Start!\n";
 

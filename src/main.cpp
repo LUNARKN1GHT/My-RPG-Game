@@ -23,9 +23,9 @@ int main() {
     // 3️⃣ 打印技能列表
     std::cout << "Player Skills:\n";
     for (size_t i = 0; i < player.getSkillCount(); ++i) {
-        const Skill* skill = player.getSkill(i);
+        const Skill *skill = player.getSkill(i);
         std::cout << i << ". " << skill->getName() << " | Mana: " << skill->getManaCost()
-                  << " | Cooldown: " << skill->getCooldown() << "\n";
+                << " | Cooldown: " << skill->getCooldown() << "\n";
     }
 
     std::cout << "\n";

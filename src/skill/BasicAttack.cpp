@@ -18,7 +18,7 @@ int BasicAttack::getCooldown() const {
     return 0;
 }
 
-void BasicAttack::use(Character& user, Character& target) {
+void BasicAttack::use(Character &user, Character &target) {
     std::cout << user.getName() << " attacks " << target.getName() << " with a basic attack!\n";
 
     target.takeDamage(user.getAttack());

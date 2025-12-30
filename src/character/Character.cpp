@@ -108,7 +108,7 @@ void Character::printInformation() {
 
     std::cout << "\nSkills: " << std::endl;
     // 打印角色技能列表
-    for (const auto & skill : skills_) {
+    for (const auto &skill: skills_) {
         std::cout << skill->getName() << " : " << skill->getDescription()
                 << std::endl;
     }

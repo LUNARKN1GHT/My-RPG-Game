@@ -2,6 +2,6 @@
 #include "../include/skill/BasicAttack.h"
 
 // 构造函数
-Mage::Mage(const std::string& name) : Character(name, 10, 50, 50, 5, 30, 30) {
+Mage::Mage(const std::string &name) : Character(name, 10, 50, 50, 5, 30, 30) {
     addSkill(std::make_unique<BasicAttack>()); // 增加普通攻击
 }

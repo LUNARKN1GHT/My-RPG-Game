@@ -8,12 +8,15 @@
  */
 class BasicAttack : public Skill {
 public:
-    [[nodiscard]] std::string getName() const override;
-    [[nodiscard]] std::string getDescription() const override;
+    // 技能信息获取
+    [[nodiscard]] std::string getName() const override; // 获取技能名称
+    [[nodiscard]] std::string getDescription() const override; // 获取技能说明
 
-    [[nodiscard]] int getManaCost() const override;
-    [[nodiscard]] int getCooldown() const override;
+    // 技能资源消耗
+    [[nodiscard]] int getManaCost() const override; // 获取技能蓝量消耗
+    [[nodiscard]] int getCooldown() const override; // 获取技能冷却时间
 
+    // 角色使用技能
     void use(Character& user, Character& target) override;
 };
 

@@ -3,5 +3,5 @@
 
 class Archer : public Character {
 public:
-    explicit Archer(const std::string& name); // 构造函数
+    explicit Archer(const std::string &name); // 构造函数
 };

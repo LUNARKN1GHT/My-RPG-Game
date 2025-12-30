@@ -4,80 +4,76 @@
 
 ```mermaid
 classDiagram
-    %% Character 类及子类
-    class Character {
-        -string name
-        -int level
-        -int hp
-        -int mp
-        +void attack(Character &target)
-        +void takeDamage(int dmg)
-        +void useSkill(int skillIndex, Character &target)
-        +void addSkill(Skill* skill)
-    }
+%% Character 类及子类
+  class Character {
+    -string name
+    -int level
+    -int hp
+    -int mp
+    +void attack(Character &target)
+    +void takeDamage(int dmg)
+    +void useSkill(int skillIndex, Character &target)
+    +void addSkill(Skill* skill)
+  }
 
-    %% 子类
-    class Warrior {
-        +void heavyAttack(CHaracter &target)
-    }
-    class Mage {
-        +void castSpell(Character &target)
-    }
-    class Archer {
-        +void rangedAttack(Character &target)
-    }
+%% 子类
+  class Warrior {
+    +void heavyAttack(CHaracter &target)
+  }
+  class Mage {
+    +void castSpell(Character &target)
+  }
+  class Archer {
+    +void rangedAttack(Character &target)
+  }
 
-    Character <|-- Warrior
-    Character <|-- Mage
-    Character <|-- Archer
+  Character <|-- Warrior
+  Character <|-- Mage
+  Character <|-- Archer
+%% Skill 类
+  class Skill {
+    -string skillName
+    -int power
+    -int mpCost
+    +void use(Character &user, Character &target)
+  }
 
-    %% Skill 类
-    class Skill {
-        -string skillName
-        -int power
-        -int mpCost
-        +void use(Character &user, Character &target)
-    }
+  Character "1" --> "*" Skill: has
+%% Item & Inventory
+  class Item {
+    -string itemName
+    -string description
+    +void use(Character &user)
+  }
 
-    Character "1" --> "*" Skill : has
+  class Inventory {
+    -list<Item*> items
+    +void addItem(Item* item)
+    +void removeItem(Item* item)
+    +void useItem(int index, Character &user)
+  }
 
-    %% Item & Inventory
-    class Item{
-        -string itemName
-        -string description
-        +void use(Character &user)
-    }
+  Character "1" --> "1" Inventory: owns
+  Inventory "1" --> "*" Item: contains
+%% Battle 系统
+  class Battle {
+    -Character* player
+    -Character* enemy
+    +void startBattle()
+    +void playerTurn()
+    +void enemyTurn()
+    +bool isBattleOver()
+  }
 
-    class Inventory {
-        -list<Item*> items
-        +void addItem(Item* item)
-        +void removeItem(Item* item)
-        +void useItem(int index, Character &user)
-    }
+  Battle "1" --> "1" Character: player
+  Battle "1" --> "1" Character: enemy
+%% 可选扩展类
+  class Potion {
+    -int healAmount
+    +void use(Character &user)
+  }
 
-    Character "1" --> "1" Inventory : owns
-    Inventory "1" --> "*" Item : contains
-
-    %% Battle 系统
-    class Battle {
-        -Character* player
-        -Character* enemy
-        +void startBattle()
-        +void playerTurn()
-        +void enemyTurn()
-        +bool isBattleOver()
-    }
-
-    Battle "1" --> "1" Character : player
-    Battle "1" --> "1" Character : enemy
-
-    %% 可选扩展类
-    class Potion {
-        -int healAmount
-        +void use(Character &user)
-    }
-
-    Potion --|> Item
+  Potion --|> Item
 ```
 
 ## 目标
@@ -99,6 +95,17 @@ classDiagram
 | Archer  | 10  |  20  | 10  |  40   |
 
 ## 更新日志
+
+### v0.5.1 项目整理
+
+#### v0.5.1 新增内容
+
+- 增加项目 UML 绘图，便于理清项目结构
+
+#### v0.5.1 修改内容
+
+- 将项目迁移到 `CLion` 上继续开发
+- 对项目代码进行格式化处理，并按照现代C++开发的要求进行了相应的标注
 
 ### v0.5 技能系统优化
 
