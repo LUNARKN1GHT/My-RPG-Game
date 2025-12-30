@@ -56,7 +56,7 @@ public:
     [[nodiscard]] int getMaxHealth() const; // 获取角色最大生命值
     virtual void printBasicInformation(); // 打印角色基本相关信息
     virtual void printSkillsInformation();  // 打印角色技能相关信息
-    [[nodiscard]] const std::vector<std::unique_ptr<Skill> > getSkills() const; // 获取角色技能信息
+    [[nodiscard]] const std::vector<std::unique_ptr<Skill> > &getSkills() const; // 获取角色技能信息
 };
 
 #endif // CHARACTER_H

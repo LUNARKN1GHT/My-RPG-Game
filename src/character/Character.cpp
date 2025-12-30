@@ -149,3 +149,8 @@ void Character::consumeMana(const int manaCost) {
         mana_ -= manaCost;
     }
 }
+
+// 获取角色全部技能组
+const std::vector<std::unique_ptr<Skill>> &Character::getSkills() const {
+    return this->skills_;
+}
