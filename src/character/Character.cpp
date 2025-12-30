@@ -99,18 +99,20 @@ int Character::getMaxHealth() const {
 }
 
 // 打印角色相关信息
-void Character::printInformation() {
+void Character::printBasicInformation() {
     std::cout << "Name: " << name_ << std::endl;
     std::cout << "Attack: " << attack_ << std::endl;
     std::cout << "Defense: " << defense_ << std::endl;
     std::cout << "Mana: " << mana_ << "/" << maxMana_ << std::endl;
     std::cout << "Health: " << health_ << "/" << maxHealth_ << std::endl;
+}
 
+// 打印角色技能信息
+void Character::printSkillsInformation() {
     std::cout << "\nSkills: " << std::endl;
-    // 打印角色技能列表
-    for (const auto &skill: skills_) {
+    for (const auto &skill : skills_) {
         std::cout << skill->getName() << " : " << skill->getDescription()
-                << std::endl;
+                  << std::endl;
     }
 }
 
