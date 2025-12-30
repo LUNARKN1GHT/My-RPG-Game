@@ -2,6 +2,7 @@
 #include "../include/skill/Skill.h"
 
 #include <iostream>
+#include <utility>
 
 /**
  * @brief 构造一个角色
@@ -13,22 +14,19 @@
  * @param health 角色生命值
  * @param maxHealth 角色最大生命值
  */
-Character::Character(const std::string name, int attack, int mana, int maxMana, int defense,
-                     int health, int maxHealth) :
-    name_(name), attack_(attack), mana_(mana), maxMana_(maxMana), defense_(defense),
-    health_(health), maxHealth_(maxHealth) {
+Character::Character(std::string name, const int attack, const int mana, const int maxMana, const int defense,
+                     const int health, const int maxHealth) : name_(std::move(name)), attack_(attack), mana_(mana),
+                                                              maxMana_(maxMana), defense_(defense),
+                                                              health_(health), maxHealth_(maxHealth) {
 }
 
 // 析构函数
-Character::~Character() {
-}
+Character::~Character() = default;
 
-void Character::takeDamage(int damage) {
+void Character::takeDamage(const int damage) {
     // TODO: 这里暂时用简单伤害计算系统，后续可以调整
     // TODO：增加打印回报信息
     if (damage < defense_) {
-        // 如果伤害小于护盾值，则不扣血
-        return;
     } else {
         // 简单地用伤害值减去防御力
         health_ -= damage - defense_;
@@ -50,10 +48,11 @@ void Character::addSkill(std::unique_ptr<Skill> skill) {
  * @param index 需要使用技能序号
  * @param target 技能使用目标
  */
-void Character::useSkill(size_t index, Character& target) {
-    Skill* skill = getSkill(index);
-    if (!skill) {
+void Character::useSkill(const size_t index, Character &target) {
+    Skill *skill = getSkill(index);
+    if (skill == nullptr) {
         std::cout << "Invalid skill index.\n";
+        return;
     }
 
     if (!skill->canUse(*this)) {
@@ -65,37 +64,37 @@ void Character::useSkill(size_t index, Character& target) {
 }
 
 // 获取角色名称
-const std::string Character::getName() const {
+std::string Character::getName() const {
     return name_;
 }
 
 // 获取角色攻击力
-const int Character::getAttack() const {
+int Character::getAttack() const {
     return attack_;
 }
 
 // 获取角色蓝量
-const int Character::getMana() const {
+int Character::getMana() const {
     return mana_;
 }
 
 // 获取角色最大蓝量
-const int Character::getMaxMana() const {
+int Character::getMaxMana() const {
     return maxMana_;
 }
 
 // 获取角色防御力
-const int Character::getDefense() const {
+int Character::getDefense() const {
     return defense_;
 }
 
 // 获取角色生命值
-const int Character::getHealth() const {
+int Character::getHealth() const {
     return health_;
 }
 
 // 获取角色最大生命值
-const int Character::getMaxHealth() const {
+int Character::getMaxHealth() const {
     return maxHealth_;
 }
 
@@ -109,17 +108,11 @@ void Character::printInformation() {
 
     std::cout << "\nSkills: " << std::endl;
     // 打印角色技能列表
-    for (size_t index = 0; index < skills_.size(); index++) {
-        std::cout << skills_[index]->getName() << " : " << skills_[index]->getDescription()
-                  << std::endl;
+    for (const auto & skill : skills_) {
+        std::cout << skill->getName() << " : " << skill->getDescription()
+                << std::endl;
     }
 }
-
-/**
- * @brief 技能对角色蓝量的消耗
- *
- * @param manaCost 技能需要的蓝量
- */
 
 /**
  * @brief 获取角色技能列表中的技能
@@ -128,7 +121,7 @@ void Character::printInformation() {
  *
  * @return 返回序号对应的技能
  */
-Skill* Character::getSkill(size_t index) const {
+Skill *Character::getSkill(const size_t index) const {
     if (index >= skills_.size()) {
         return nullptr;
     }
@@ -147,7 +140,7 @@ size_t Character::getSkillCount() const {
 /**
  * @brief 角色消耗蓝量
  */
-void Character::consumeMana(int manaCost) {
+void Character::consumeMana(const int manaCost) {
     if (mana_ < manaCost) {
         mana_ = 0;
     } else {

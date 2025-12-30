@@ -1,4 +1,5 @@
 #include "../include/battle/Battle.h"
+#include <iostream>
 
 // 构造函数
 Battle::Battle(Character* player) : player_(player) {
@@ -12,7 +13,7 @@ void Battle::addEnemy(Character* enemy) {
 }
 
 // 打印敌人列表
-void Battle::printEnemyList() {
+void Battle::printEnemyList() const {
     // TODO: 打印敌人列表提示
     for (size_t i = 0; i < enemyList_.size(); ++i) {
         std::cout << i << ": " << enemyList_[i]->getName() << "(HP: " << enemyList_[i]->getHealth()
@@ -21,7 +22,7 @@ void Battle::printEnemyList() {
 }
 
 // 战斗开始
-void Battle::start() {
+void Battle::start() const {
     if (!player_ || enemyList_.empty()) {
         // 空指针检查，不存在角色或敌人的时候直接返回
         std::cout << "Battle cannot start.\n";

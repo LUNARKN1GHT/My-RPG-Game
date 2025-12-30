@@ -8,13 +8,13 @@
  */
 class BasicAttack : public Skill {
 public:
-    std::string getName() const override;
-    std::string getDescription() const override;
+    [[nodiscard]] std::string getName() const override;
+    [[nodiscard]] std::string getDescription() const override;
 
-    int getManaCost() const override;
-    int getCooldown() const override;
+    [[nodiscard]] int getManaCost() const override;
+    [[nodiscard]] int getCooldown() const override;
 
     void use(Character& user, Character& target) override;
 };
 
-#endif // BASIC_ATTACH_H
+#endif // BASIC_ATTACK_H

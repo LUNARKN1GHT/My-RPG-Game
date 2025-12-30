@@ -1,6 +1,7 @@
-#include "Character.h"
+#pragma once
+#include "../include/character/Character.h"
 
 class Archer : public Character {
 public:
-    Archer(const std::string& name); // 构造函数
+    explicit Archer(const std::string& name); // 构造函数
 };
