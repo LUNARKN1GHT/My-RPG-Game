@@ -19,9 +19,10 @@
 Character::Character(std::string name, const int attack, const int mana, const int maxMana,
                      const int physicalDefense, const int magicalDefense,
                      const int health, const int maxHealth) : name_(std::move(name)), attack_(attack), mana_(mana),
-                                                  maxMana_(maxMana), health_(health),
-                                                  maxHealth_(maxHealth),
-                                                  physicalDefense_(physicalDefense), magicalDefense_(magicalDefense) {
+                                                              maxMana_(maxMana), health_(health),
+                                                              maxHealth_(maxHealth),
+                                                              physicalDefense_(physicalDefense),
+                                                              magicalDefense_(magicalDefense) {
 }
 
 // 析构函数
@@ -37,6 +38,8 @@ void Character::takeDamage(const int damage, DamageType damageType) {
         case DamageType::Magical:
             defense = magicalDefense_;
             break;
+        case DamageType::TrueDamage:
+            defense = 0;
     }
 
     int finalDamage = damage - defense;
@@ -132,12 +135,18 @@ void Character::printSkillsInformation() {
     std::cout << "\nSkills: " << std::endl;
     for (const auto &skill: skills_) {
         std::cout << skill->getName();
-        if (skill->getDamageType() == DamageType::Physical) {
-            std::cout << " (Physical) ";
-        } else if (skill->getDamageType() == DamageType::Magical) {
-            std::cout << " (Magical) ";
+        switch (skill->getDamageType()) {
+            case DamageType::Physical:
+                std::cout << " (Physical) ";
+                break;
+            case DamageType::Magical:
+                std::cout << " (Magical) ";
+                break;
+            case DamageType::TrueDamage:
+                std::cout << " (TrueDamage) ";
+                break;
         }
-        std::cout << " : "<<skill->getDescription() << std::endl;
+        std::cout << " : " << skill->getDescription() << std::endl;
     }
 }
 

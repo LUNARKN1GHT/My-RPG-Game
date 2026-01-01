@@ -10,7 +10,8 @@
  */
 enum class DamageType {
     Physical,
-    Magical
+    Magical,
+    TrueDamage
 };
 
 
