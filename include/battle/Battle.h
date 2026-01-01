@@ -16,7 +16,7 @@ private:
     Character *player_; // 玩家角色
     std::vector<Character *> enemyList_; // 敌人列表
 
-    void playerTurn() const; // 玩家回合
+    void playerTurn(); // 玩家回合
     void enemyTurn() const; // 敌人回合
     [[nodiscard]] bool allEnemiesDefeated() const; // 判断是否所有敌人都被消灭
     [[nodiscard]] bool isBattleOver() const; // 判断战斗是否结束
@@ -31,7 +31,7 @@ public:
 
     void start() const; // 游戏启动
 
-    void run() const; // 战斗主循环
+    void run(); // 战斗主循环
 };
 
 #endif // BATTLE_H

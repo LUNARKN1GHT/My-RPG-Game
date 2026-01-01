@@ -4,6 +4,7 @@
 
 #include "../include/skill/Skill.h"
 #include "../include/input/InputHandler.h"
+#include <vector>
 #include <iostream>
 #include <ranges>
 
@@ -55,7 +56,7 @@ void Battle::start() const {
 /**
  * @brief 战斗系统
  */
-void Battle::run() const {
+void Battle::run() {
     std::cout << "=== Battle Start! ===\n";
 
     while (!isBattleOver()) {
@@ -81,13 +82,17 @@ void Battle::run() const {
 /**
  * @brief 处理玩家回合
  */
-void Battle::playerTurn() const {
+void Battle::playerTurn() {
     std::cout << "\n--- Player Turn! ---\n";
 
     const size_t skillIndex = InputHandler::selectSkill(*player_);
     const size_t targetIndex = InputHandler::selectEnemy(enemyList_);
 
     player_->useSkill(skillIndex, *enemyList_[targetIndex]);
+
+    std::erase_if(enemyList_, [](const Character* e) {
+        return e->getHealth() <= 0;
+    });
 }
 
 /**
