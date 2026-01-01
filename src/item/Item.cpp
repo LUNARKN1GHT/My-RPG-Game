@@ -8,7 +8,8 @@
  *
  * @param name 物品名称
  * @param description 物品描述
+ * @param targetType 物品适用对象标注
  */
-Item::Item(const std::string &name, const std::string &description)
-    : name_(name), descriptions_(description){
+Item::Item(const std::string &name, const std::string &description, const TargetType targetType)
+    : name_(name), descriptions_(description), targetType_(targetType){
 }

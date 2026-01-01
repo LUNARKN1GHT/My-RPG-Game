@@ -28,3 +28,27 @@ void HealthPotion::use(Character &target) {
 
     target.heal(healAmount_);
 }
+
+/**
+ *
+ * @return 获取物品名称
+ */
+const std::string &Item::getName() const {
+    return name_;
+}
+
+/**
+ *
+ * @return 获取物品说明
+ */
+const std::string &Item::getDescription() const {
+    return descriptions_;
+}
+
+/**
+ *
+ * @return 物品使用对象类型
+ */
+int Item::getTargetType() const {
+    return targetType_;
+}
