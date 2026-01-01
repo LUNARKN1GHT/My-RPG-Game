@@ -188,3 +188,20 @@ void Character::consumeMana(const int manaCost) {
 const std::vector<std::unique_ptr<Skill> > &Character::getSkills() const {
     return this->skills_;
 }
+
+/**
+ * @brief 角色恢复生命值
+ *
+ * @param healAmount 恢复生命值数量
+ */
+void Character::heal(const int healAmount) {
+    if (healAmount <= 0) {
+        return;
+    }
+
+    if (health_ + healAmount >= maxHealth_) {
+        health_ = maxHealth_;
+    } else {
+        health_ += healAmount;
+    }
+}

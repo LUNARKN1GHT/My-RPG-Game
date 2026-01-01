@@ -43,13 +43,16 @@ public:
     [[nodiscard]] int getAttack() const; // 获取角色攻击力
     [[nodiscard]] int getMana() const; // 获取角色蓝量
     [[nodiscard]] int getMaxMana() const; // 获取角色最大蓝量
-    [[nodiscard]] int getPhysicalDefense() const;   // 获取角色物理抗性
+    [[nodiscard]] int getPhysicalDefense() const; // 获取角色物理抗性
     [[nodiscard]] int getMagicalDefense() const;
     [[nodiscard]] int getHealth() const; // 获取角色生命值
     [[nodiscard]] int getMaxHealth() const; // 获取角色最大生命值
     virtual void printBasicInformation(); // 打印角色基本相关信息
-    virtual void printSkillsInformation();  // 打印角色技能相关信息
+    virtual void printSkillsInformation(); // 打印角色技能相关信息
     [[nodiscard]] const std::vector<std::unique_ptr<Skill> > &getSkills() const; // 获取角色技能信息
+
+    // 角色属性调整函数
+    void heal(int healAmount); // 角色恢复生命值
 };
 
 #endif // CHARACTER_H
