@@ -134,6 +134,8 @@ void Character::printSkillsInformation() {
         std::cout << skill->getName();
         if (skill->getDamageType() == DamageType::Physical) {
             std::cout << " (Physical) ";
+        } else if (skill->getDamageType() == DamageType::Magical) {
+            std::cout << " (Magical) ";
         }
         std::cout << " : "<<skill->getDescription() << std::endl;
     }
