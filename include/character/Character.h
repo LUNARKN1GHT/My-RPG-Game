@@ -8,6 +8,7 @@
 #include <vector>
 
 class Skill; // 前向声明
+class Item;
 
 /**
  * @brief 游戏中的角色类
@@ -24,6 +25,8 @@ class Character {
 
     std::vector<std::unique_ptr<Skill> > skills_; // 技能列表
 
+    std::vector<std::unique_ptr<Item> > items_; // 物品列表
+
 public:
     Character(std::string name, int attack, int mana, int maxMana, int physicalDefense, int magicalDefense, int health,
               int maxHealth); // 构造函数
@@ -38,13 +41,18 @@ public:
     [[nodiscard]] Skill *getSkill(size_t index) const; // 获取角色技能列表中的技能
     [[nodiscard]] size_t getSkillCount() const; // 获取技能数量
 
+    // 物品相关接口
+    void addItem(std::unique_ptr<Item> item); // 角色列表中增加物品
+    void useItem(size_t index, Character &target); // 向某个目标使用特定物品
+    size_t getItemCount() const; // 获取物品列表中的物品数量
+
     // 对外接口类函数
     [[nodiscard]] std::string getName() const; // 获取角色名字
     [[nodiscard]] int getAttack() const; // 获取角色攻击力
     [[nodiscard]] int getMana() const; // 获取角色蓝量
     [[nodiscard]] int getMaxMana() const; // 获取角色最大蓝量
     [[nodiscard]] int getPhysicalDefense() const; // 获取角色物理抗性
-    [[nodiscard]] int getMagicalDefense() const;
+    [[nodiscard]] int getMagicalDefense() const; // 获取角色魔法抗性
     [[nodiscard]] int getHealth() const; // 获取角色生命值
     [[nodiscard]] int getMaxHealth() const; // 获取角色最大生命值
     virtual void printBasicInformation(); // 打印角色基本相关信息

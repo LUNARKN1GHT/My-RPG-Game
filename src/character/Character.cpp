@@ -4,6 +4,8 @@
 #include <iostream>
 #include <utility>
 
+#include "item/Item.h"
+
 /**
      * @brief 默认构造函数
      *
@@ -204,4 +206,39 @@ void Character::heal(const int healAmount) {
     } else {
         health_ += healAmount;
     }
+}
+
+/**
+ * @brief 向角色物品栏中增加新的物品
+ *
+ * @param item 新增的物品
+ */
+void Character::addItem(std::unique_ptr<Item> item) {
+    items_.push_back(std::move(item));
+}
+
+/**
+ * @brief 根据物品索引对某个对象使用物品
+ *
+ * @param index 角色物品栏中物品的位置
+ * @param target 物品使用目标
+ */
+void Character::useItem(const size_t index, Character &target) {
+    if (index >= getItemCount()) {
+        std::cout << "Invalid item index!\n";
+        return;
+    }
+
+    items_[index]->use(target);
+
+    // 使用后消耗物品
+    items_.erase(items_.begin() + index);
+}
+
+/**
+ *
+ * @return 角色物品栏中物品的数量
+ */
+size_t Character::getItemCount() const {
+    return items_.size();
 }
