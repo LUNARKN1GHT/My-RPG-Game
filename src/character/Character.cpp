@@ -131,8 +131,11 @@ void Character::printBasicInformation() {
 void Character::printSkillsInformation() {
     std::cout << "\nSkills: " << std::endl;
     for (const auto &skill: skills_) {
-        std::cout << skill->getName() << " : " << skill->getDescription()
-                << std::endl;
+        std::cout << skill->getName();
+        if (skill->getDamageType() == DamageType::Physical) {
+            std::cout << " (Physical) ";
+        }
+        std::cout << " : "<<skill->getDescription() << std::endl;
     }
 }
 
