@@ -242,3 +242,11 @@ void Character::useItem(const size_t index, Character &target) {
 size_t Character::getItemCount() const {
     return items_.size();
 }
+
+/**
+ *
+ * @return 角色物品栏的列表
+ */
+const std::vector<std::unique_ptr<Item> > &Character::getItems() const {
+    return this->items_;
+}

@@ -44,7 +44,8 @@ public:
     // 物品相关接口
     void addItem(std::unique_ptr<Item> item); // 角色列表中增加物品
     void useItem(size_t index, Character &target); // 向某个目标使用特定物品
-    size_t getItemCount() const; // 获取物品列表中的物品数量
+    [[nodiscard]] size_t getItemCount() const; // 获取物品列表中的物品数量
+    [[nodiscard]] const std::vector<std::unique_ptr<Item> > &getItems() const; // 获取物品列表中所有列表
 
     // 对外接口类函数
     [[nodiscard]] std::string getName() const; // 获取角色名字
