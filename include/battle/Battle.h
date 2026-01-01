@@ -18,8 +18,8 @@ private:
 
     void playerTurn() const; // 玩家回合
     void enemyTurn() const; // 敌人回合
-    bool allEnemiesDefeated() const; // 判断是否所有敌人都被消灭
-    bool isBattleOver() const; // 判断战斗是否结束
+    [[nodiscard]] bool allEnemiesDefeated() const; // 判断是否所有敌人都被消灭
+    [[nodiscard]] bool isBattleOver() const; // 判断战斗是否结束
 
 protected:
     void printEnemyList() const; // 打印敌人列表

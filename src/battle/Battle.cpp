@@ -85,8 +85,9 @@ void Battle::playerTurn() const {
     std::cout << "\n--- Player Turn! ---\n";
 
     const size_t skillIndex = InputHandler::selectSkill(*player_);
+    const size_t targetIndex = InputHandler::selectEnemy(enemyList_);
 
-    player_->useSkill(skillIndex, *enemyList_[0]);
+    player_->useSkill(skillIndex, *enemyList_[targetIndex]);
 }
 
 /**
