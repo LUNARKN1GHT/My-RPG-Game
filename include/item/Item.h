@@ -13,9 +13,18 @@ class Item {
 private:
     std::string name_; // 物品名称
     std::string descriptions_; // 物品描述
+    int targetType_; // 物品使用对象
 
 public:
-    Item(const std::string &name, const std::string &description); // 构造函数
+    /**
+     * 物品作用对象
+     */
+    enum class TargetType {
+        self,
+        enemy
+    };
+
+    Item(const std::string &name, const std::string &description, const TargetType targetType); // 构造函数
     virtual ~Item() = default; // 析构函数
 
     virtual void use(Character &target) = 0; // 物品使用函数
