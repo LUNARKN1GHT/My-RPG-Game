@@ -250,3 +250,12 @@ size_t Character::getItemCount() const {
 const std::vector<std::unique_ptr<Item> > &Character::getItems() const {
     return this->items_;
 }
+
+/**
+ *
+ * @param index 物品在物品栏中的索引
+ * @return 索引对应的物品
+ */
+Item &Character::getItem(const size_t index) const {
+    return *items_[index];
+}
