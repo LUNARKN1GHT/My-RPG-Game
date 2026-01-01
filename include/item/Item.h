@@ -5,7 +5,6 @@
 #ifndef MY_RPG_GAME_ITEM_H
 #define MY_RPG_GAME_ITEM_H
 
-#include <complex.h>
 #include <string>
 
 class Character;
@@ -16,7 +15,7 @@ private:
     std::string descriptions_; // 物品描述
 
 public:
-    Item(std::string name, std::string description); // 构造函数
+    Item(const std::string &name, const std::string &description); // 构造函数
     virtual ~Item() = default; // 析构函数
 
     virtual void use(Character &target) = 0; // 物品使用函数

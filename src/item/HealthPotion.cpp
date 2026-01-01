@@ -13,7 +13,7 @@
  *
  * @param healAmount 血瓶回复血量的数值
  */
-HealthPotion::HealthPotion(int healAmount)
+HealthPotion::HealthPotion(const int healAmount)
     : Item("Health Potion", "Restores health"),
       healAmount_(healAmount) {
 }
