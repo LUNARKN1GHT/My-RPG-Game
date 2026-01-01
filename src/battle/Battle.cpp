@@ -1,5 +1,11 @@
 #include "../include/battle/Battle.h"
+
+#include <algorithm>
+
+#include "../include/skill/Skill.h"
+#include "../include/input/InputHandler.h"
 #include <iostream>
+#include <ranges>
 
 /**
  * @brief 构造函数
@@ -45,3 +51,77 @@ void Battle::start() const {
 
     player_->useSkill(0, *enemy);
 }
+
+/**
+ * @brief 战斗系统
+ */
+void Battle::run() const {
+    std::cout << "=== Battle Start! ===\n";
+
+    while (!isBattleOver()) {
+        playerTurn();
+        if (isBattleOver()) break;
+
+        enemyTurn();
+        if (isBattleOver()) break;
+
+        // 回合结束：冷却推进
+        for (size_t i = 0; i < player_->getSkillCount(); i++) {
+            player_->getSkill(i)->tickCooldown();
+        }
+    }
+
+    if (player_->getHealth() > 0) {
+        std::cout << "You win!\n";
+    } else {
+        std::cout << "You lost!\n";
+    }
+}
+
+/**
+ * @brief 处理玩家回合
+ */
+void Battle::playerTurn() const {
+    std::cout << "\n--- Player Turn! ---\n";
+
+    const size_t skillIndex = InputHandler::selectSkill(*player_);
+
+    player_->useSkill(skillIndex, *enemyList_[0]);
+}
+
+/**
+ * @brief 处理敌人回合
+ */
+void Battle::enemyTurn() const {
+    std::cout << "\n--- Enemy Turn! ---\n";
+
+    // TODO：优化敌人战斗逻辑，这里暂时只是使用普攻
+    for (const auto &enemy : enemyList_) {
+        enemy->useSkill(0, *player_);
+
+        if (player_->getHealth() <= 0) {
+            break;
+        }
+    }
+}
+
+/**
+ * @brief 判断是否所有敌人都被打败
+ *
+ * @return 敌人是否都被打败的 bool 值
+ */
+bool Battle::allEnemiesDefeated() const {
+    return std::ranges::all_of(enemyList_, [](const Character* enemy) {
+        return enemy->getHealth() <= 0;
+    });
+}
+
+/**
+ * @brief 判断战斗是否结束
+ *
+ * @return 战斗是否结束的 bool 值
+ */
+bool Battle::isBattleOver() const {
+    return player_->getHealth() <= 0 || allEnemiesDefeated();
+}
+
