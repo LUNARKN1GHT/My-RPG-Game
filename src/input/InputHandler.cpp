@@ -8,6 +8,12 @@
 
 #include "skill/Skill.h"
 
+/**
+ * @brief 玩家选择技能窗口
+ *
+ * @param player 玩家所用的角色类
+ * @return 玩家的输入选择
+ */
 size_t InputHandler::selectSkill(const Character &player) {
     std::cout << "\nChoose a skill:\n";
 
@@ -20,5 +26,23 @@ size_t InputHandler::selectSkill(const Character &player) {
     size_t choice;
     std::cin >> choice;
 
+    return choice;
+}
+
+/**
+ * @brief 玩家选择敌人窗口
+ *
+ * @param enemies 敌人列表
+ * @return 玩家选择的敌人
+ */
+size_t InputHandler::selectEnemy(const std::vector<Character *> &enemies) {
+    std::cout << "\nChoose a target:\n";
+
+    for (size_t i = 0; i < enemies.size(); i++) {
+        std::cout << i << ". " << enemies[i]->getName() << "(HP: " << enemies[i]->getHealth() << ")\n";
+    }
+
+    size_t choice;
+    std::cin >> choice;
     return choice;
 }
