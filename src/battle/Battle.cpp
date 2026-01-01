@@ -1,11 +1,19 @@
 #include "../include/battle/Battle.h"
 #include <iostream>
 
-// 构造函数
+/**
+ * @brief 构造函数
+ *
+ * @param player 进入战斗的角色
+ */
 Battle::Battle(Character *player) : player_(player) {
 }
 
-// 添加敌人
+/**
+ * @brief 在战斗中增加敌人
+ *
+ * @param enemy 加入战斗的敌人
+ */
 void Battle::addEnemy(Character *enemy) {
     if (enemy) {
         enemyList_.push_back(enemy);
