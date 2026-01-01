@@ -7,19 +7,28 @@
 #include "../include/skill/Fireball.h"
 #include "../include/skill/Skill.h"
 #include "../include/core/DamageType.h"
+#include "../include/input/InputHandler.h"
 
 #include <iostream>
 #include <memory>
 
 int main() {
-    std::cout << "=== Skill List Test ===\n";
+    std::cout << "=== Battle System Test ===\n";
 
-    Mage player("Hero");
-    Character enemy("Dummy", 0, 0, 0, 0, 0, 100, 100);
+    Character player("Hero", 20, 50, 50, 5, 10, 100, 100);
 
-    Fireball fireball;
+    Character goblin("Goblin", 10, 0, 0, 2, 0, 60, 60);
+    Character orc("Orc", 15, 0, 0, 5, 0, 80, 80);
+
+    player.addSkill(std::make_unique<BasicAttack>());
     player.addSkill(std::make_unique<Fireball>());
 
-    player.printBasicInformation();
-    player.printSkillsInformation();
+    goblin.addSkill(std::make_unique<BasicAttack>());
+    orc.addSkill(std::make_unique<BasicAttack>());
+
+    Battle battle(&player);
+    battle.addEnemy(&goblin);
+    battle.addEnemy(&orc);
+
+    battle.run();
 }
