@@ -2,11 +2,11 @@
 // Created by LEE32 on 2026/1/1.
 //
 
+#include "../include/item/Item.h"
+#include "../include/skill/Skill.h"
 #include "../include/input/InputHandler.h"
 #include "../include/character/Character.h"
 #include <iostream>
-
-#include "skill/Skill.h"
 
 /**
  * @brief 玩家选择技能窗口
@@ -40,6 +40,23 @@ size_t InputHandler::selectEnemy(const std::vector<Character *> &enemies) {
 
     for (size_t i = 0; i < enemies.size(); i++) {
         std::cout << i << ". " << enemies[i]->getName() << "(HP: " << enemies[i]->getHealth() << ")\n";
+    }
+
+    size_t choice;
+    std::cin >> choice;
+    return choice;
+}
+
+/**
+ *
+ * @param player 玩家角色
+ * @return 玩家选择的物品
+ */
+size_t InputHandler::selectItem(const Character &player) {
+    std::cout << "\nChoose a item:\n";
+
+    for (size_t i = 0; i < player.getItemCount(); i++) {
+        std::cout << i << ". " << player.getItems()[i]->getName() << "\n";
     }
 
     size_t choice;
