@@ -63,3 +63,21 @@ size_t InputHandler::selectItem(const Character &player) {
     std::cin >> choice;
     return choice;
 }
+
+/**
+ *
+ * @return 返回玩家操作的对象
+ */
+InputHandler::Action InputHandler::selectAction() {
+    std::cout << "\nChoose action:\n";
+    std::cout << "1. Use Skill\n";
+    std::cout << "2. Use Item\n";
+
+    int choice;
+    std::cin >> choice;
+
+    if (choice == 2) {
+        return Action::UseItem;
+    }
+    return Action::UseSkill;
+}
