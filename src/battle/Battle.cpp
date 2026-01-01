@@ -8,6 +8,8 @@
 #include <iostream>
 #include <ranges>
 
+#include "item/Item.h"
+
 /**
  * @brief 构造函数
  *
@@ -85,15 +87,36 @@ void Battle::run() {
 void Battle::playerTurn() {
     std::cout << "\n--- Player Turn! ---\n";
 
-    const size_t skillIndex = InputHandler::selectSkill(*player_);
-    const size_t targetIndex = InputHandler::selectEnemy(enemyList_);
-    const size_t itemIndex = InputHandler::selectItem(*player_);
+    switch (InputHandler::selectAction()) {
+        case InputHandler::Action::UseSkill: {
+            const size_t skillIndex = InputHandler::selectSkill(*player_);
+            const size_t targetIndex = InputHandler::selectEnemy(enemyList_);
 
-    player_->useSkill(skillIndex, *enemyList_[targetIndex]);
+            player_->useSkill(skillIndex, *enemyList_[targetIndex]);
 
-    std::erase_if(enemyList_, [](const Character* e) {
-        return e->getHealth() <= 0;
-    });
+            std::erase_if(enemyList_, [](const Character* e) {
+                return e->getHealth() <= 0;
+            });
+            break;
+        }
+        case InputHandler::Action::UseItem: {
+            const size_t itemIndex = InputHandler::selectItem(*player_);
+            switch (const Item& item = player_->getItem(itemIndex); item.getTargetType()) {
+                case Item::TargetType::Enemy: {
+                    const size_t targetIndex = InputHandler::selectEnemy(enemyList_);
+                    player_->useItem(itemIndex, *enemyList_[targetIndex]);
+                    break;
+                }
+                case Item::TargetType::Self: {
+                    player_->useItem(itemIndex, *player_);
+                    break;
+                }
+                default:
+                    std::cout << "Unknown item target type!\n";
+                    break;
+            }
+        }
+    }
 }
 
 /**

@@ -15,8 +15,8 @@ public:
      * 物品作用对象
      */
     enum class TargetType {
-        self,
-        enemy
+        Self,
+        Enemy
     };
 
 private:
@@ -25,7 +25,7 @@ private:
     TargetType targetType_; // 物品使用对象
 
 public:
-    Item(const std::string &name, const std::string &description, const TargetType targetType); // 构造函数
+    Item(const std::string &name, const std::string &description, TargetType targetType); // 构造函数
     virtual ~Item() = default; // 析构函数
 
     virtual void use(Character &target) = 0; // 物品使用函数
@@ -34,7 +34,7 @@ public:
 
     [[nodiscard]] const std::string &getDescription() const;
 
-    [[nodiscard]] int getTargetType() const;
+    [[nodiscard]] TargetType getTargetType() const;
 };
 
 

@@ -14,7 +14,7 @@
  * @param healAmount 血瓶回复血量的数值
  */
 HealthPotion::HealthPotion(const int healAmount)
-    : Item("Health Potion", "Restores health", Item::TargetType::self),
+    : Item("Health Potion", "Restores health", Item::TargetType::Self),
       healAmount_(healAmount) {
 }
 
@@ -49,6 +49,6 @@ const std::string &Item::getDescription() const {
  *
  * @return 物品使用对象类型
  */
-int Item::getTargetType() const {
+Item::TargetType Item::getTargetType() const {
     return targetType_;
 }
