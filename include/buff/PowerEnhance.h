@@ -6,6 +6,7 @@
 #define MY_RPG_GAME_POWERENHANCE_H
 
 #include "../include/buff/Buff.h"
+#include "../include/core/EffectType.h"
 
 class PowerEnhance : public Buff {
 private:
@@ -18,7 +19,11 @@ public:
 
     [[nodiscard]] std::string getDescription() const override;
 
-    [[nodiscard]] BuffType getBuffType() const override;
+    [[nodiscard]] EffectType getBuffType() const override;
+
+    void onApply(Character &target) override;
+    void onTick(Character &target) override;
+    void onRemove(Character &target) override;
 };
 
 
