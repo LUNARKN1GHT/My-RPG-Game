@@ -14,7 +14,7 @@
 struct StatModifier {
     StatType stat; // 修改哪个属性
     ModifyMode mode; // 修改方式
-    float value; // 修改数值
+    int value; // 修改数值
     EffectType effectType; // 正/负/中
 };
 
