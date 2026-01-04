@@ -2,6 +2,7 @@
 #define CHARACTER_H
 
 #include "../include/core/DamageType.h"
+#include "../include/core/Modifier.h"
 
 #include <memory>
 #include <string>
@@ -26,6 +27,8 @@ class Character {
     std::vector<std::unique_ptr<Skill> > skills_; // 技能列表
 
     std::vector<std::unique_ptr<Item> > items_; // 物品列表
+
+    int& getStatRef(StatType type); // 获取属性修改接口
 
 public:
     Character(std::string name, int attack, int mana, int maxMana, int physicalDefense, int magicalDefense, int health,
@@ -63,6 +66,7 @@ public:
 
     // 角色属性调整函数
     void heal(int healAmount); // 角色恢复生命值
+    void applyModifier(const StatModifier& modifier);
 };
 
 #endif // CHARACTER_H

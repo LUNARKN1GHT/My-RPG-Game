@@ -6,16 +6,11 @@
 #define MY_RPG_GAME_BUFF_H
 
 #include <string>
+#include "../include/core/EffectType.h"
 
 class Character;
 
 class Buff {
-public:
-    enum class BuffType {
-        Positive, // 正向增益
-        Negative // 负向增益
-    };
-
 private:
     int remainTime_ = 0;
 
@@ -24,7 +19,7 @@ public:
 
     [[nodiscard]] virtual std::string getName() const = 0; // 获取效果名称
     [[nodiscard]] virtual std::string getDescription() const = 0; // 获取效果说明
-    [[nodiscard]] virtual BuffType getBuffType() const; // 获取技能效果
+    [[nodiscard]] virtual EffectType getBuffType() const; // 获取技能效果
     [[nodiscard]] virtual bool canApplyTo(const Character &target) const; // 生效规则
     virtual bool onApply(Character &target); // 刚被加上的效果
     virtual void onTick(Character &target); // 每个回合的效果

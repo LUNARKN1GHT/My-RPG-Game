@@ -30,6 +30,19 @@ Character::Character(std::string name, const int attack, const int mana, const i
 // 析构函数
 Character::~Character() = default;
 
+int &Character::getStatRef(const StatType type) {
+    switch (type) {
+        case StatType::Attack: return attack_;
+        case StatType::Mana: return mana_;
+        case StatType::MaxMana: return maxMana_;
+        case StatType::Health: return health_;
+        case StatType::MaxHealth: return maxHealth_;
+        case StatType::PhysicalDefense: return physicalDefense_;
+        case StatType::MagicalDefense: return magicalDefense_;
+    }
+    throw std::logic_error("Invalid StatType");
+}
+
 void Character::takeDamage(const int damage, DamageType damageType) {
     int defense = 0;
 
@@ -258,4 +271,23 @@ const std::vector<std::unique_ptr<Item> > &Character::getItems() const {
  */
 Item &Character::getItem(const size_t index) const {
     return *items_[index];
+}
+
+void Character::applyModifier(const StatModifier &modifier) {
+    int& stat = getStatRef(modifier.stat);
+
+    switch (modifier.mode) {
+        case ModifyMode::Add: {
+            stat += static_cast<int>(modifier.value);
+            break;
+        }
+        case ModifyMode::Multiply: {
+            stat = static_cast<int>(stat * modifier.value);
+            break;
+        }
+        case ModifyMode::Override: {
+            stat = static_cast<int>(modifier.value);
+            break;
+        }
+    }
 }
