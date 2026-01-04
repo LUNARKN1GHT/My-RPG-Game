@@ -9,7 +9,8 @@
 #include "../../include/character/Character.h"
 
 PowerEnhance::PowerEnhance(const int bonus, const int duration)
-    : bonusPower_(bonus), duration_(duration) {
+    : bonusPower_(bonus) {
+    setRemainTime(duration);
 }
 
 std::string PowerEnhance::getName() const {
@@ -36,4 +37,8 @@ void PowerEnhance::onTick(Character &target) {
 void PowerEnhance::onRemove(Character &target) {
     const StatModifier modifier(StatType::Attack, ModifyMode::Add, -bonusPower_, EffectType::Neutral);
     target.applyModifier(modifier);
+}
+
+bool PowerEnhance::canApplyTo(const Character &target) const {
+    return true;
 }

@@ -11,7 +11,6 @@
 class PowerEnhance : public Buff {
 private:
     int bonusPower_; // 提升的效果量
-    int duration_;  // 持续的时间
 
 public:
     explicit PowerEnhance(int bonus, int duration);
@@ -24,6 +23,8 @@ public:
     void onApply(Character &target) override;
     void onTick(Character &target) override;
     void onRemove(Character &target) override;
+
+    [[nodiscard]] bool canApplyTo(const Character &target) const override;
 };
 
 
