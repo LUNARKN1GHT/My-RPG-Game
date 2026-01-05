@@ -291,3 +291,25 @@ void Character::applyModifier(const StatModifier &modifier) {
         }
     }
 }
+
+const std::vector<std::unique_ptr<Buff> > &Character::getBuffs() const {
+    return this->buffs_;
+}
+
+void Character::printBuffByType(const EffectType buffType, const std::string &title) const {
+    std::cout << title << ":\n";
+
+    for (const auto& buff : buffs_) {
+        if (buff->getBuffType() == buffType) {
+            std::cout << buff->getName() << " : " << buff->getDescription() << "\n";
+        }
+    }
+}
+
+void Character::printPositiveBuff() const {
+    printBuffByType(EffectType::Positive, "Positive Buffs");
+}
+
+void Character::printNegativeBuff() const {
+    printBuffByType(EffectType::Negative, "Negative Buffs");
+}

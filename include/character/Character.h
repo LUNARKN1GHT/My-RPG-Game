@@ -3,6 +3,7 @@
 
 #include "../include/core/DamageType.h"
 #include "../include/core/Modifier.h"
+#include "../include/buff/Buff.h"
 
 #include <memory>
 #include <string>
@@ -29,6 +30,8 @@ class Character {
     std::vector<std::unique_ptr<Item> > items_; // 物品列表
 
     int& getStatRef(StatType type); // 获取属性修改接口
+
+    std::vector<std::unique_ptr<Buff> > buffs_; // 效果列表
 
 public:
     Character(std::string name, int attack, int mana, int maxMana, int physicalDefense, int magicalDefense, int health,
@@ -67,6 +70,12 @@ public:
     // 角色属性调整函数
     void heal(int healAmount); // 角色恢复生命值
     void applyModifier(const StatModifier& modifier);
+
+    // 角色效果相关函数
+    [[nodiscard]] const std::vector<std::unique_ptr<Buff> > &getBuffs() const; // 获取角色身上的buff列表
+    void printBuffByType(EffectType buffType, const std::string& title) const; // 统一打印接口
+    void printPositiveBuff() const; // 打印正面效果
+    void printNegativeBuff() const; // 打印负面效果
 };
 
 #endif // CHARACTER_H
