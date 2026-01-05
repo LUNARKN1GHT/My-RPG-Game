@@ -4,9 +4,12 @@
 #include "../include/core/DamageType.h"
 #include "../include/core/Modifier.h"
 #include "../include/buff/Buff.h"
+#include "../include/equipment/Equipment.h"
+#include "../include/core/EquipSlot.h"
 
 #include <memory>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 class Skill; // 前向声明
@@ -32,6 +35,8 @@ class Character {
     int& getStatRef(StatType type); // 获取属性修改接口
 
     std::vector<std::unique_ptr<Buff> > buffs_; // 效果列表
+
+    std::pmr::unordered_map<EquipSlot, std::unique_ptr<Equipment>> equipment_; // 装备列表
 
 public:
     Character(std::string name, int attack, int mana, int maxMana, int physicalDefense, int magicalDefense, int health,
@@ -76,6 +81,11 @@ public:
     void printBuffByType(EffectType buffType, const std::string& title) const; // 统一打印接口
     void printPositiveBuff() const; // 打印正面效果
     void printNegativeBuff() const; // 打印负面效果
+
+    // 角色装备相关函数
+    bool equip(std::unique_ptr<Equipment> equipment); // 判断当前位置是否已经穿戴装备
+    std::unique_ptr<Equipment> unEquip(EquipSlot slot); // 卸掉当前位置装备
+    const Equipment* getEquipment(EquipSlot slot) const; // 当前位置穿上装备
 };
 
 #endif // CHARACTER_H

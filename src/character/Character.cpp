@@ -313,3 +313,30 @@ void Character::printPositiveBuff() const {
 void Character::printNegativeBuff() const {
     printBuffByType(EffectType::Negative, "Negative Buffs");
 }
+
+bool Character::equip(std::unique_ptr<Equipment> equipment) {
+    EquipSlot slot = equipment->getSlot();
+
+    // 已有装备
+    if (equipment_.contains(slot)) {
+        return false;
+    }
+
+    equipment_[slot] = std::move(equipment);
+    return true;
+}
+
+std::unique_ptr<Equipment> Character::unEquip(const EquipSlot slot) {
+    if (!equipment_.contains(slot)) {
+        return nullptr;
+    }
+
+    std::unique_ptr<Equipment> unequipped = std::move(equipment_[slot]);
+    equipment_.erase(slot);
+    return unequipped;
+}
+
+const Equipment *Character::getEquipment(const EquipSlot slot) const {
+    const auto it = equipment_.find(slot);
+    return it != equipment_.end() ? it->second.get() : nullptr;
+}
