@@ -1,85 +1,258 @@
 @startuml
-title My-RPG-Game — Core Architecture
-
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontSize 10
+skinparam packageStyle rectangle
 skinparam classAttributeIconSize 0
-skinparam monochrome true
 
-' =========================
-' Skill System
-' =========================
+title RPG游戏系统类图
 
-abstract class Skill {
-    - currentCooldown_ : int
+package "核心模块" {
+  enum DamageType {
+    Physical
+    Magical
+    TrueDamage
+  }
 
-    + getName() : string
-    + getDescription() : string
-    + getManaCost() : int
-    + getCooldown() : int
+  enum EffectType {
+    Positive
+    Negative
+    Neutral
+  }
 
-    + canUse(user : Character) : bool
-    + onUse(user : Character) : void
-    + tickCooldown() : void
+  enum StatType {
+    Attack
+    Mana
+    MaxMana
+    Health
+    MaxHealth
+    PhysicalDefense
+    MagicalDefense
+  }
 
-    + use(user : Character, target : Character) : void
+  enum ModifyMode {
+    Add
+    Multiply
+    Override
+  }
+
+  enum EquipSlot {
+    Helmet
+    Chest
+    Legs
+    Boots
+    Hand
+  }
+
+  class StatModifier {
+    +StatType stat
+    +ModifyMode mode
+    +int value
+    +EffectType effectType
+  }
 }
 
-class BasicAttack {
-    + getName() : string
-    + getDescription() : string
-    + getManaCost() : int
-    + getCooldown() : int
-    + use(user : Character, target : Character) : void
+package "角色模块" {
+  abstract class Character {
+    -string name_
+    -int attack_
+    -int mana_
+    -int maxMana_
+    -int health_
+    -int maxHealth_
+    -int physicalDefense_
+    -int magicalDefense_
+    -vector<Skill*> skills_
+    -vector<Item*> items_
+    -vector<Buff*> buffs_
+    -unordered_map<EquipSlot, Equipment*> equipment_
+    +Character(string name, int attack, int mana, int maxMana, int physicalDefense, int magicalDefense, int health, int maxHealth)
+    +~Character()
+    +takeDamage(int damage, DamageType damageType)
+    +addSkill(Skill* skill)
+    +useSkill(size_t index, Character& target)
+    +consumeMana(int manaCost)
+    +Skill* getSkill(size_t index)
+    +getSkillCount()
+    +addItem(Item* item)
+    +useItem(size_t index, Character& target)
+    +getItemCount()
+    +vector<Item*>& getItems()
+    +Item& getItem(size_t index)
+    +getName()
+    +getAttack()
+    +getMana()
+    +getMaxMana()
+    +getPhysicalDefense()
+    +getMagicalDefense()
+    +getHealth()
+    +getMaxHealth()
+    +printBasicInformation()
+    +printSkillsInformation()
+    +heal(int healAmount)
+    +applyModifier(StatModifier& modifier)
+    +vector<Buff*>& getBuffs()
+    +printBuffByType(EffectType buffType, string title)
+    +printPositiveBuff()
+    +printNegativeBuff()
+    +equip(Equipment* equipment)
+    +unEquip(EquipSlot slot)
+    +Equipment* getEquipment(EquipSlot slot)
+  }
+
+  class Warrior {
+    +Warrior(const string& name)
+  }
+
+  class Archer {
+    +Archer(const string& name)
+  }
+
+  class Mage {
+    +Mage(const string& name)
+  }
 }
 
-class Fireball {
-    + getName() : string
-    + getDescription() : string
-    + getManaCost() : int
-    + getCooldown() : int
-    + use(user : Character, target : Character) : void
+package "技能模块" {
+  abstract class Skill {
+    -int currentCooldown_
+    +~Skill()
+    +{abstract} getName()
+    +{abstract} getDescription()
+    +{abstract} getDamageType()
+    +{abstract} getManaCost()
+    +{abstract} getCooldown()
+    +canUse(const Character& user)
+    +onUse(Character& user)
+    +tickCooldown()
+    +{abstract} use(Character& user, Character& target)
+  }
+
+  class BasicAttack {
+    +getName()
+    +getDescription()
+    +getDamageType()
+    +getManaCost()
+    +getCooldown()
+    +use(Character& user, Character& target)
+  }
+
+  class Fireball {
+    +getName()
+    +getDescription()
+    +getDamageType()
+    +getManaCost()
+    +getCooldown()
+    +getDamageType()
+    +use(Character& user, Character& target)
+  }
 }
 
+package "物品模块" {
+  class Item {
+    <<enumeration>> TargetType
+    Self
+    Enemy
+    -string name_
+    -string descriptions_
+    -TargetType targetType_
+    +Item(const string& name, const string& description, TargetType targetType)
+    +~Item()
+    +{abstract} use(Character& target)
+    +getName()
+    +getDescription()
+    +getTargetType()
+  }
+
+  class HealthPotion {
+    -int healAmount_
+    +HealthPotion(int healAmount)
+    +use(Character& target)
+  }
+}
+
+package "效果模块" {
+  abstract class Buff {
+    -int remainTime_
+    +~Buff()
+    +{abstract} getName()
+    +{abstract} getDescription()
+    +{abstract} getBuffType()
+    +{abstract} canApplyTo(const Character& target)
+    +onApply(Character& target)
+    +onTick(Character& target)
+    +onRemove(Character& target)
+    +getRemainTime()
+    +isExpired()
+    +tickRemainTime()
+    +setRemainTime(int time)
+  }
+
+  class PowerEnhance {
+    +PowerEnhance(int power, int duration)
+    +getName()
+    +getDescription()
+    +getBuffType()
+    +canApplyTo(const Character& target)
+    +onApply(Character& target)
+    +onTick(Character& target)
+    +onRemove(Character& target)
+  }
+}
+
+package "装备模块" {
+  abstract class Equipment {
+    +~Equipment()
+    +{abstract} getName()
+    +{abstract} getSlot()
+  }
+}
+
+package "战斗模块" {
+  class Battle {
+    -Character* player_
+    -vector<Character*> enemyList_
+    +Battle(Character* player)
+    +addEnemy(Character* enemy)
+    +start()
+    +run()
+    -playerTurn()
+    -enemyTurn()
+    -allEnemiesDefeated()
+    -isBattleOver()
+    -printEnemyList()
+  }
+}
+
+package "输入模块" {
+  class InputHandler {
+    +static getChoice()
+    +static getValidChoice(int min, int max)
+  }
+}
+
+' 继承关系
+Character <|-- Warrior
+Character <|-- Archer
+Character <|-- Mage
 Skill <|-- BasicAttack
 Skill <|-- Fireball
+Item <|-- HealthPotion
+Buff <|-- PowerEnhance
+Equipment <|-- SpecificEquipment
 
-' =========================
-' Character System
-' =========================
-
-class Character {
-    - name_ : string
-    - attack_ : int
-    - mana_ : int
-    - maxMana_ : int
-    - defense_ : int
-    - health_ : int
-    - maxHealth_ : int
-
-    - skills_ : vector<unique_ptr<Skill>>
-
-    + addSkill(skill : unique_ptr<Skill>) : void
-    + getSkill(index : size_t) : Skill*
-    + getSkillCount() : size_t
-    + useSkill(index : size_t, target : Character) : void
-
-    + takeDamage(damage : int) : void
-    + consumeMana(amount : int) : void
-}
-
-Character "1" o-- "*" Skill : owns
-
-' =========================
-' Battle System
-' =========================
-
-class Battle {
-    - player_ : Character
-    - enemies_ : vector<Character>
-
-    + runTurn() : void
-    - printEnemyList() : void
-}
-
-Battle --> Character : controls
+' 关联关系
+Character ||--o{ Skill : "has skills"
+Character ||--o{ Item : "has items"
+Character ||--o{ Buff : "has buffs"
+Character ||--o{ Equipment : "has equipment"
+Skill ||--|| DamageType : "has type"
+Buff ||--|| EffectType : "has type"
+StatModifier ||--|| StatType : "modifies"
+StatModifier ||--|| ModifyMode : "uses mode"
+StatModifier ||--|| EffectType : "has effect"
+Battle ||--|| Character : "has player"
+Battle ||--o{ Character : "has enemies"
+Battle ||--|| InputHandler : "uses"
 
 @enduml
